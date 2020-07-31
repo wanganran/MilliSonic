@@ -90,7 +90,7 @@ class FMCWAoA {
   def estimatePhaseGivenTm(tm:Float, portion:Float)={
     val F=AcousticProperty.VER2_FMCW_FEND-AcousticProperty.VER2_FMCW_FSTART
     val T=AcousticProperty.VER2_FMCW_CHIRP_DURATION
-    val A=portion*3/2*Math.PI.toFloat*F+2*Math.PI.toFloat*AcousticProperty.VER2_FMCW_FSTART
+    val A=portion * VER2_FMCW_WINDOWSIZE / VER2_FMCW_CHIRP_DURATION_SAMPLE * 2 * Math.PI.toFloat*F+2*Math.PI.toFloat*AcousticProperty.VER2_FMCW_FSTART
     val C= Math.PI.toFloat*F/T
     val phi=C*tm*tm+A*tm
     phi
@@ -100,7 +100,7 @@ class FMCWAoA {
     val F=AcousticProperty.VER2_FMCW_FEND-AcousticProperty.VER2_FMCW_FSTART
     val T=AcousticProperty.VER2_FMCW_CHIRP_DURATION
     val tm=freq/AcousticProperty.VER2_FMCW_WINDOWSIZE/AcousticProperty.VER2_SR/F*T
-    val A=portion*3/2*Math.PI.toFloat*F+2*Math.PI.toFloat*AcousticProperty.VER2_FMCW_FSTART
+    val A=portion * VER2_FMCW_WINDOWSIZE / VER2_FMCW_CHIRP_DURATION_SAMPLE * 2 * Math.PI.toFloat*F+2*Math.PI.toFloat*AcousticProperty.VER2_FMCW_FSTART
     val C= Math.PI.toFloat*F/T
     val phi=C*tm*tm+A*tm
     phi
@@ -117,7 +117,7 @@ class FMCWAoA {
   def estimateTmGivenPhase(ph:Float, portion:Float)= {
     val F = AcousticProperty.VER2_FMCW_FEND - AcousticProperty.VER2_FMCW_FSTART
     val T = AcousticProperty.VER2_FMCW_CHIRP_DURATION
-    val A = portion * 3 / 2 * Math.PI.toFloat * F + 2 * Math.PI.toFloat * AcousticProperty.VER2_FMCW_FSTART
+    val A = portion * VER2_FMCW_WINDOWSIZE / VER2_FMCW_CHIRP_DURATION_SAMPLE * 2 * Math.PI.toFloat * F + 2 * Math.PI.toFloat * AcousticProperty.VER2_FMCW_FSTART
     val C = Math.PI.toFloat * F / T
     val tm = (-A + Math.sqrt(A * A + 4 * C * ph).toFloat) / C / 2
     tm
